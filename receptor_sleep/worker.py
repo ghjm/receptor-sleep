@@ -26,7 +26,7 @@ async def request(queue, duration, repeat):
     queue.done = True
 
 
-def execute(message):
+def execute(message, config):
     loop = asyncio.get_event_loop()
     queue = ResponseQueue(loop=loop)
     payload = json.loads(message.raw_payload)

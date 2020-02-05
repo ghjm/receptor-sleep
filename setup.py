@@ -18,7 +18,6 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     install_requires=[
-        'requests',
     ],
     zip_safe=False,
     entry_points={

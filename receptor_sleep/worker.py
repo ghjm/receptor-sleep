@@ -11,7 +11,11 @@ def configure_logger():
     for handler in receptor_logger.handlers:
         logger.addHandler(handler)
 
+def receptor_export(func):
+    setattr(func, "receptor_export", True)
+    return func
 
+@receptor_export
 def execute(message, config, result_queue):
     configure_logger()
     try:

@@ -28,6 +28,7 @@ def execute(message, config, result_queue):
     duration = payload.pop("duration", 30)
     repeat = payload.pop("repeat", 1)
     ident = payload.pop("ident", "No ID")
+    responses = payload.pop("responses", 1)
 
     idx = 0
     while idx < repeat:
@@ -37,4 +38,6 @@ def execute(message, config, result_queue):
         )
         time.sleep(duration)
         idx += 1
-        result_queue.put("{}: iteration {}".format(ident, idx))
+        logger.debug(f"Putting {responses} responses on the result queue")
+        for resp in range(responses):
+            result_queue.put(f"{ident}: iteration {idx}, response {resp+1}")

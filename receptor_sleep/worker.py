@@ -1,6 +1,7 @@
 import json
 import logging
 import time
+import receptor
 
 logger = logging.getLogger(__name__)
 
@@ -15,11 +16,11 @@ def receptor_export(func):
     setattr(func, "receptor_export", True)
     return func
 
-@receptor_export
+@receptor.plugin_export(payload_type=receptor.BYTES_PAYLOAD)
 def execute(message, config, result_queue):
     configure_logger()
     try:
-        payload = json.loads(message.raw_payload)
+        payload = json.loads(message)
     except json.JSONDecodeError as err:
         logger.exception(err)
         raise
